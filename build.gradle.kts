@@ -37,10 +37,3 @@ intellijPlatform {
     }
     buildSearchableOptions = false
 }
-
-tasks.processResources {
-    from("../vscode") {
-        include("package.json", "language-configuration.json", "syntaxes/**", "snippets/**")
-        into("textmate")
-    }
-}

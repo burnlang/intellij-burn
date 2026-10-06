@@ -1,0 +1,28 @@
+{
+  "name": "burn",
+  "displayName": "Burn",
+  "version": "26.2.0",
+  "contributes": {
+    "languages": [
+      {
+        "id": "burn",
+        "aliases": ["Burn", "burn"],
+        "extensions": [".bn"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "burn",
+        "scopeName": "source.burn",
+        "path": "./syntaxes/burn.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "burn",
+        "path": "./snippets/burn.json"
+      }
+    ]
+  }
+}
