@@ -11,6 +11,7 @@
         <li>Find usages, highlight usages, rename across files and workspace symbols</li>
         <li>Formatting and quick fixes</li>
         <li>Run, run natively and build from the editor</li>
+        <li>Reload Burn Project (<code>ash sync</code>) like a Gradle sync, with a prompt when <code>burn.toml</code> changes</li>
     </ul>
     <p>The language features come from <code>burn lsp</code>. The plugin finds <code>burn</code> on your <code>PATH</code>,
     in <code>$BURN_HOME/bin</code> or in <code>~/.burn/bin</code>.</p>
@@ -23,6 +24,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <textmate.bundleProvider implementation="dev.burnlang.intellij.BurnTextMateBundleProvider"/>
         <notificationGroup id="Burn" displayType="BALLOON"/>
+        <editorNotificationProvider implementation="dev.burnlang.intellij.BurnManifestNotificationProvider"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">
@@ -36,6 +38,11 @@
         <fileNamePatternMapping patterns="*.bn" serverId="burn" languageId="burn"/>
     </extensions>
 
+    <projectListeners>
+        <listener class="dev.burnlang.intellij.BurnManifestListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    </projectListeners>
+
     <actions>
         <group id="Burn.Actions" text="Burn" popup="true">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
@@ -46,6 +53,11 @@
                     text="Compile and Run Natively" description="Compile the current file to machine code and run it"/>
             <action id="Burn.Build" class="dev.burnlang.intellij.BurnCommandAction$Build"
                     text="Build Executable" description="Build a native executable with burn build"/>
+            <action id="Burn.ReloadProject" class="dev.burnlang.intellij.ReloadProjectAction"
+                    text="Reload Burn Project" description="Run ash sync to install the packages in burn.toml, then restart the language server"
+                    icon="AllIcons.Actions.Refresh">
+                <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            </action>
             <separator/>
             <action id="Burn.OpenStdlib" class="dev.burnlang.intellij.OpenLibrarySourceAction$Stdlib"
                     text="Open Standard Library Module..." description="Open the source of a std module"/>
