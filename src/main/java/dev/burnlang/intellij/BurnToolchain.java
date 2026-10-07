@@ -18,7 +18,15 @@ public final class BurnToolchain {
     }
 
     public static @NotNull String executable() {
-        String name = SystemInfo.isWindows ? "burn.exe" : "burn";
+        return find("burn");
+    }
+
+    public static @NotNull String ash() {
+        return find("ash");
+    }
+
+    private static @NotNull String find(@NotNull String tool) {
+        String name = SystemInfo.isWindows ? tool + ".exe" : tool;
         File onPath = PathEnvironmentVariableUtil.findInPath(name);
         if (onPath != null) {
             return onPath.getAbsolutePath();

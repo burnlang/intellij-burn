@@ -6,13 +6,14 @@ other JetBrains IDEs from 2024.2 on. Highlighting comes from the TextMate gramma
 comes from the Burn language server through [LSP4IJ](https://github.com/redhat-developer/lsp4ij): diagnostics,
 completion, hover, parameter info, inlay hints, go to declaration (also into the standard library and built-ins),
 find usages, implementations, rename, formatting and quick fixes. **Tools | Burn** runs, natively runs and builds the current file and opens the
-library sources.
+library sources. **Reload Burn Project** runs `ash sync` and restarts the language server, like a Gradle sync;
+after `burn.toml` changes, its editor shows a **Load Burn Changes** banner.
 
 ```sh
 gradle buildPlugin
 ```
 
-This needs JDK 21 and Gradle 9 or newer. Install `build/distributions/burn-intellij-26.2.0.zip` with **Settings |
+This needs JDK 21 and Gradle 9 or newer. Install `build/distributions/burn-intellij-26.3.0.zip` with **Settings |
 Plugins | Install Plugin from Disk...**. The plugin starts `burn lsp` from your `PATH`, `$BURN_HOME/bin` or
 `~/.burn/bin`.
 
